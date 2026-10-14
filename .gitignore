@@ -1,0 +1,12 @@
+# Virtual Environment (This stops the 10,000+ files error)
+.venv/
+env/
+venv/
+ENV/
+
+# Python Cache files
+**/__pycache__/
+*.pyc
+
+# Local IDE configuration settings
+.vscode/
