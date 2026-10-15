@@ -1,61 +1,78 @@
+#imports
 from ursina import *
-import numpy as np
+from ursina.prefabs.first_person_controller import FirstPersonController
+from ursina.shaders import lit_with_shadows_shader
+import numpy
+import random
+import math
+    
 
-# Initialize the 3D Engine window
-app = Ursina(title="3D Gravity Simulator")
+#Display and stuff
+app = Ursina(title = "3D SOLAR SYSTEM GRAVITY ORBIT", size = (1500, 1200))
 
-# Physics Sandbox Values
-G = 100            # Gravitational constant scaled for visibility
-time_step = 0.02   # Physics delta time per frame
-bodies = []        # Tracks all celestial objects
+#exit key
+def input(key):
+    if (key == 'x'):       
+        quit()
+    else:
+        pass
 
-class CelestialBody(Entity):
-    def __init__(self, name, mass, pos, vel, body_color, body_scale):
-        super().__init__(model='sphere', color=body_color, position=pos, scale=body_scale)
-        self.name = name
-        self.mass = mass
-        self.velocity = np.array(vel, dtype=float) # Velocity vector [X, Y, Z]
-        bodies.append(self)
-
-    def calculate_gravity(self):
-        if self.name == "Sun": return # Keep the sun fixed at the center
-        
-        total_force = np.array([0.0, 0.0, 0.0])
-        my_pos = np.array([self.x, self.y, self.z])
-
-        for other in bodies:
-            if other == self: continue
-            
-            other_pos = np.array([other.x, other.y, other.z])
-            direction = other_pos - my_pos
-            distance = np.linalg.norm(direction)
-
-            if distance < 0.2: continue # Avoid division by zero on collision
-
-            # Newton's Gravity Formula: F = G * (m1 * m2) / r^2
-            force_mag = G * (self.mass * other.mass) / (distance ** 2)
-            total_force += force_mag * (direction / distance)
-
-        # Update physics values (Acceleration = Force / Mass)
-        acceleration = total_force / self.mass
-        self.velocity += acceleration * time_step
-        
-        # Apply velocity vectors to Ursina 3D coordinates
-        self.x += self.velocity[0] * time_step
-        self.y += self.velocity[1] * time_step
-        self.z += self.velocity[2] * time_step
-
-# --- Environment Setup ---
-Sky(color=color.black) # Space backdrop
-EditorCamera()         # Enables free camera navigation (Hold Right-Click + WASD to fly)
-
-# --- Spawn Objects ---
-sun = CelestialBody("Sun", mass=1000, pos=(0,0,0), vel=(0,0,0), body_color=color.yellow, body_scale=3)
-earth = CelestialBody("Earth", mass=1, pos=(10,0,0), vel=(0,0,100), body_color=color.cyan, body_scale=1)
-
-# Frame update loop called by Ursina automatically
+#PROPER CODE 
 def update():
-    for body in bodies:
-        body.calculate_gravity()
+ # smooth buttons
+    if held_keys['z']:
+        sun.scale_x += 2 * time.dt
+        sun.scale_y += 2 * time.dt
+        sun.scale_z += 2 * time.dt
+        
+    if held_keys['y']:
+        sun.scale_x -= 2 * time.dt
+        sun.scale_y -= 2 * time.dt
+        sun.scale_z -= 2 * time.dt
+#constraint
+    if sun.scale_x < 0.1:
+        sun.scale_x = 0.1
+        sun.scale_y = 0.1
+        sun.scale_z = 0.1
 
+#the math
+    global j
+    j = j + 0.01
+    angle = math.pi*40/180
+
+#planet radius
+    radius_1 = 3.6
+    earth.x = math.cos(j)*radius_1
+    earth.z = math.sin(j)*radius_1
+
+#Y-axis movement
+    sun.rotation_y += time.dt*20
+    earth.rotation_y += time.dt*20
+
+
+#background
+class Sky(Entity):
+    def __init__(self):    
+        super().__init__(
+            model = 'sphere',
+            texture = 'assets/space',
+            parent = scene,
+            scale = 45,
+            double_sided = True 
+        ) 
+
+
+
+#planets
+# my son aka sun
+sun = Entity(model='sphere',texture='assets/suntexture', scale= 1)
+#Earthy poo
+earth = Entity(model='sphere',texture='assets/earth', scale= 1, position = (1,0,1))
+
+
+
+sky = Sky()
+EditorCamera()
+j = -math.pi
+#open and run window
 app.run()

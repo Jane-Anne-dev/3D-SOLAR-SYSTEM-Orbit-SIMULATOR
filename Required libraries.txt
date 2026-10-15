@@ -1,0 +1,7 @@
+numpy             2.5.4
+pip               26.1.2
+Ursina 
+
+
+ link to assets (sourced from google):
+https://www.istockphoto.com/photos/black-space-stars

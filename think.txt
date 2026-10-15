@@ -1,0 +1,37 @@
+  couldn't install pygame so will do with ursina
+  realised pygame was for 2d so than God it didn't install, else i wouldve done the wrong project
+  try to add some input function later for like rotating around the 3d simulator
+
+  currently testing out some code to really familiarize myself with the works of ursina
+  ooooo i got a cube running. im the goat. ursina. ursina has its own default entities
+
+  im gonna try adding textures. apparently jpeg, or any kind of image file works. then i'll trye gif.
+
+  I GOT A SUNNNNNNNNNNNN!!!!!!!!
+
+  for some reason swiping the cursor super fast across the screen makes the sun speed up
+  my first code brea. First i didn't know how to install an 'unzoom' button so i kept trying different mathematical expressions then i just decided to stick to -= because divide wasn't coming up on the internet.
+  Then it worked and all the keys kept quiting. Then i found out i had to add brackets. Okay cool, i added that then i pressed y and z a bunch of time then boom y started zooming too so i have ot give y some constraints
+  then i'll add a tab that shows all the button instructions
+  next i'll add some navigations 
+  i made the navigations picture yayyy
+  im thinking of adding a random image button
+  i adjusted the scale so the navigations image shows proeprly
+  then i'll add images for the random image button later and a boom sound 
+  bro my y button keeps zooming in instead of out
+  so i fixed it, kinda. I put /= so many times and it didnt work, istg ts is playing with me 
+  ayyy i got smooth zooms but its too fast now
+  and now my z button is broken
+  honestly i might work on this for more than a week so each lanet can become explorable. I'll add a player.position function and assign them to numbers. I'll add a map that allows the player to see what number each planet is then maybe, i'll let the play click to land on the planet too. too transport options
+  and maybe add a loading screen of like time warp
+
+  buttons - done
+  random images - not done
+  9 planets and one sun - sun, 
+
+
+
+
+I added an editor camera which lets you rotate the world with left click and drag but im too lazy to edit my system navigation image lol
+i just found out you can like fully zoom in and out if you have a mouse
+also the z and y function just makes the sun itself bigger, i'll connect it
