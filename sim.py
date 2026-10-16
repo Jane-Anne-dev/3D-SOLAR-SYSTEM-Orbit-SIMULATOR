@@ -11,7 +11,20 @@ import math
 app = Ursina(title = "3D SOLAR SYSTEM GRAVITY ORBIT", size = (1500, 1200))
 #image list
 image_list = [
-    'assets/so you want to be a pilot'
+    'assets/so you want to be a pilot',
+    'assets/ineedspace',
+    'assets/kristylockin',
+    'assets/physicsjoke1',
+    'assets/me',
+    'assets/plutomyboy',
+    'assets/oh',
+    'assets/son',
+    'assets/physicsjoke1',
+    'assets/physicsjoke2',
+    'assets/physicsjoke3',
+    'assets/physicsjoke4',
+    'assets/physicsjoke5'
+
 ]
 
 #exit key
@@ -28,7 +41,7 @@ def input(key):
             model = 'quad',
             texture = random_image,
             parent = camera.ui,
-            scale = 1,
+            scale = 0.6,
             position = (random_x, random_y)
         )
         invoke(destroy, img_pop, delay = 1)
@@ -165,10 +178,9 @@ pluto = Entity(model = 'sphere', texture = 'assets/pluto', scale = 0.3)
 orbit_pluto = orbit_line(6.8)
 
 
-
-
+spacesounds = Audio('assets/background_music', loop=True, autoplay=True, volume=2)
 sky = Sky()
-EditorCamera()
+EditorCamera() 
 j = -math.pi
 #open and run window
 app.run()
